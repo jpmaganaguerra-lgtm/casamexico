@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Backoffice — Vocero del Zócalo</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --hueso:#F3EFE8; --marmol:#E7E3DB; --greige:#D8D2C8; --musgo:#5E6657;
+  --nogal:#6B5648; --cafe:#2F2925; --terracota:#8B4A3A; --terracota-light:#C4745F;
+  --verde:#5E7A5E; --rojo:#A94438;
+  --serif:'Cormorant Garamond',Georgia,serif; --sans:'DM Sans',system-ui,sans-serif;
+}
+html,body{height:100%}
+body{background:var(--hueso);color:var(--cafe);font-family:var(--sans);font-weight:400;font-size:14px;line-height:1.6}
+a{color:inherit}
+button{font-family:inherit;cursor:pointer}
+
+/* ---------- shell ---------- */
+.vz-shell{display:flex;min-height:100vh}
+.vz-sidebar{width:230px;flex:none;background:var(--cafe);color:var(--hueso);padding:2rem 1.5rem;display:flex;flex-direction:column;gap:2rem}
+.vz-brand{display:flex;align-items:center;gap:.7rem}
+.vz-brand svg{flex:none}
+.vz-brand-text{font-family:var(--serif);font-size:1.05rem;line-height:1.2}
+.vz-brand-text small{display:block;font-family:var(--sans);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--terracota-light);margin-bottom:.2rem}
+.vz-nav{display:flex;flex-direction:column;gap:.3rem}
+.vz-nav button{background:none;border:none;text-align:left;color:rgba(243,239,232,.65);padding:.6rem .7rem;font-size:.8rem;letter-spacing:.03em;border-radius:4px;transition:all .15s}
+.vz-nav button:hover{color:var(--hueso);background:rgba(243,239,232,.06)}
+.vz-nav button.is-active{color:var(--hueso);background:rgba(243,239,232,.1)}
+.vz-sidebar-foot{margin-top:auto;font-size:.68rem;color:rgba(243,239,232,.35);line-height:1.6}
+.vz-sidebar-foot a{color:rgba(243,239,232,.5);text-decoration:underline}
+.vz-main{flex:1;padding:2.5rem 3rem;max-width:980px}
+.vz-view{display:none}
+.vz-view.is-active{display:block}
+h1.vz-title{font-family:var(--serif);font-weight:300;font-size:1.9rem;margin-bottom:.3rem}
+.vz-sub{color:var(--nogal);font-size:.85rem;margin-bottom:2rem}
+
+/* ---------- cards / forms ---------- */
+.vz-card{background:#fff;border:1px solid var(--greige);border-radius:6px;padding:1.8rem;margin-bottom:1.5rem}
+.vz-row{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.vz-field{margin-bottom:1.2rem}
+.vz-field label{display:block;font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:var(--nogal);margin-bottom:.4rem;font-weight:500}
+.vz-field .vz-hint{font-size:.72rem;color:rgba(107,86,72,.6);margin-top:.35rem}
+input[type=text],input[type=date],input[type=password],textarea,select{
+  width:100%;border:1px solid var(--greige);border-radius:4px;padding:.6rem .8rem;font-family:var(--sans);font-size:.88rem;color:var(--cafe);background:var(--hueso);
+}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--terracota)}
+textarea{resize:vertical;min-height:70px}
+.vz-counter{font-size:.68rem;color:rgba(107,86,72,.55);text-align:right;margin-top:.25rem}
+.vz-counter.is-over{color:var(--rojo)}
+
+/* ---------- buttons ---------- */
+.vz-btn{display:inline-flex;align-items:center;gap:.5rem;border:1px solid var(--greige);background:#fff;color:var(--cafe);padding:.6rem 1.3rem;font-size:.75rem;letter-spacing:.05em;text-transform:uppercase;border-radius:4px;transition:all .15s}
+.vz-btn:hover{border-color:var(--cafe)}
+.vz-btn-primary{background:var(--terracota);border-color:var(--terracota);color:#fff}
+.vz-btn-primary:hover{background:var(--cafe);border-color:var(--cafe)}
+.vz-btn-danger{background:#fff;border-color:var(--rojo);color:var(--rojo)}
+.vz-btn-danger:hover{background:var(--rojo);color:#fff}
+.vz-btn:disabled{opacity:.45;cursor:not-allowed}
+.vz-btn-row{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.5rem}
+
+/* ---------- table ---------- */
+.vz-table{width:100%;border-collapse:collapse}
+.vz-table th{text-align:left;font-size:.68rem;letter-spacing:.05em;text-transform:uppercase;color:var(--nogal);padding:.6rem .8rem;border-bottom:1px solid var(--greige)}
+.vz-table td{padding:.8rem;border-bottom:1px solid var(--marmol);font-size:.85rem;vertical-align:middle}
+.vz-table tr:last-child td{border-bottom:none}
+.vz-pill{font-size:.62rem;letter-spacing:.05em;text-transform:uppercase;padding:.25rem .6rem;border-radius:20px;background:var(--marmol);color:var(--nogal)}
+.vz-pill.is-draft{background:#F3E4C8;color:#8a5a1a}
+.vz-table-actions{display:flex;gap:.5rem}
+.vz-table-actions button{font-size:.68rem;letter-spacing:.03em;text-transform:uppercase;background:none;border:none;color:var(--terracota);text-decoration:underline}
+.vz-table-actions button.danger{color:var(--rojo)}
+
+/* ---------- editor toolbar ---------- */
+.vz-tabs{display:flex;gap:.4rem;margin-bottom:.6rem}
+.vz-tabs button{background:var(--marmol);border:none;padding:.4rem 1rem;font-size:.68rem;letter-spacing:.05em;text-transform:uppercase;border-radius:4px 4px 0 0;color:var(--nogal)}
+.vz-tabs button.is-active{background:var(--cafe);color:var(--hueso)}
+.vz-toolbar{display:flex;gap:.3rem;flex-wrap:wrap;background:var(--marmol);padding:.5rem;border:1px solid var(--greige);border-bottom:none;border-radius:4px 4px 0 0}
+.vz-toolbar button{background:#fff;border:1px solid var(--greige);border-radius:3px;width:30px;height:30px;font-size:.8rem;color:var(--cafe)}
+.vz-toolbar button:hover{border-color:var(--terracota);color:var(--terracota)}
+.vz-editor{border:1px solid var(--greige);border-radius:0 0 4px 4px;padding:1rem;min-height:320px;background:#fff;font-size:.92rem;line-height:1.75;overflow-y:auto}
+.vz-editor:focus{outline:none;border-color:var(--terracota)}
+.vz-editor h2{font-family:var(--serif);font-size:1.3rem;margin:.8rem 0 .4rem}
+.vz-editor h3{font-family:var(--serif);font-size:1.1rem;margin:.7rem 0 .4rem}
+.vz-editor p{margin-bottom:.8rem}
+.vz-editor blockquote{border-left:3px solid var(--terracota);padding-left:1rem;font-style:italic;color:var(--nogal);margin:.8rem 0}
+.vz-html-raw{display:none;width:100%;min-height:320px;font-family:ui-monospace,monospace;font-size:.78rem}
+.vz-html-raw.is-active{display:block}
+.vz-editor.is-hidden{display:none}
+
+/* ---------- cover preview ---------- */
+.vz-cover-preview{width:220px;aspect-ratio:4/3;background:var(--marmol);border-radius:4px;overflow:hidden;margin-bottom:.8rem;display:flex;align-items:center;justify-content:center;color:rgba(107,86,72,.4);font-size:.7rem;text-align:center}
+.vz-cover-preview img{width:100%;height:100%;object-fit:cover}
+
+/* ---------- log / status ---------- */
+.vz-log{background:var(--cafe);color:var(--hueso);border-radius:6px;padding:1rem 1.2rem;font-size:.78rem;font-family:ui-monospace,monospace;max-height:220px;overflow-y:auto;margin-top:1.2rem;display:none}
+.vz-log.is-visible{display:block}
+.vz-log div{padding:.15rem 0;opacity:.85}
+.vz-log div.ok{color:#9fcf9f}
+.vz-log div.err{color:#e39b9b}
+
+/* ---------- gate / settings ---------- */
+.vz-gate{max-width:460px;margin:4rem auto;text-align:center}
+.vz-gate .vz-card{text-align:left}
+.vz-badge-conn{display:inline-flex;align-items:center;gap:.4rem;font-size:.72rem;color:var(--verde)}
+.vz-badge-conn::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--verde)}
+.vz-alert{background:#FBEAEA;border:1px solid #E3B3B3;color:#8a2f2f;padding:.9rem 1.1rem;border-radius:4px;font-size:.82rem;margin-bottom:1.2rem}
+.vz-alert.ok{background:#EAF3EA;border-color:#B7D4B7;color:#31552f}
+
+@media(max-width:820px){
+  .vz-shell{flex-direction:column}
+  .vz-sidebar{width:100%;flex-direction:row;align-items:center;padding:1rem 1.2rem}
+  .vz-nav{flex-direction:row;flex-wrap:wrap}
+  .vz-sidebar-foot{display:none}
+  .vz-main{padding:1.5rem}
+  .vz-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="vz-shell">
+  <aside class="vz-sidebar">
+    <div class="vz-brand">
+      <svg width="30" height="30" viewBox="0 0 80 80" fill="none" aria-hidden="true"><circle cx="40" cy="40" r="36" stroke="rgba(243,239,232,.5)" stroke-width="1.2"/><circle cx="40" cy="40" r="28" stroke="rgba(243,239,232,.5)" stroke-width="1.2"/><circle cx="40" cy="40" r="10" stroke="rgba(243,239,232,.5)" stroke-width="1.2"/><circle cx="40" cy="40" r="4" fill="rgba(243,239,232,.5)"/><line x1="40" y1="4" x2="40" y2="14" stroke="rgba(243,239,232,.5)" stroke-width="1.2"/><line x1="40" y1="66" x2="40" y2="76" stroke="rgba(243,239,232,.5)" stroke-width="1.2"/><line x1="4" y1="40" x2="14" y2="40" stroke="rgba(243,239,232,.5)" stroke-width="1.2"/><line x1="66" y1="40" x2="76" y2="40" stroke="rgba(243,239,232,.5)" stroke-width="1.2"/></svg>
+      <div class="vz-brand-text"><small>Casa México</small>Vocero del Zócalo</div>
+    </div>
+    <nav class="vz-nav" id="mainNav">
+      <button data-view="dashboard" class="is-active">Entradas</button>
+      <button data-view="editor">Nueva entrada</button>
+      <button data-view="settings">Conexión</button>
+    </nav>
+    <div class="vz-sidebar-foot">
+      Backoffice estático — publica directo al repositorio de GitHub.<br><br>
+      <a href="../index.html">← Volver al sitio</a>
+    </div>
+  </aside>
+
+  <main class="vz-main">
+
+    <!-- ============ SETTINGS / CONEXIÓN ============ -->
+    <section class="vz-view" id="view-settings">
+      <h1 class="vz-title">Conexión con GitHub</h1>
+      <p class="vz-sub">El backoffice publica directamente en tu repositorio: cada vez que guardas, se hace un commit real a la rama que elijas.</p>
+
+      <div class="vz-card">
+        <div id="connBadge"></div>
+        <div class="vz-row">
+          <div class="vz-field">
+            <label>Usuario u organización</label>
+            <input type="text" id="cfgOwner" placeholder="p.ej. juanpablo">
+          </div>
+          <div class="vz-field">
+            <label>Repositorio</label>
+            <input type="text" id="cfgRepo" placeholder="p.ej. casa-mexico-website">
+          </div>
+        </div>
+        <div class="vz-field">
+          <label>Rama</label>
+          <input type="text" id="cfgBranch" value="main">
+        </div>
+        <div class="vz-field">
+          <label>Token de acceso personal (GitHub)</label>
+          <input type="password" id="cfgToken" placeholder="ghp_ / github_pat_ ...">
+          <p class="vz-hint">Genera uno en GitHub → Settings → Developer settings → Fine-grained tokens, con permiso <strong>Contents: Read and write</strong> limitado a este repositorio. No se envía a ningún lado más que a api.github.com.</p>
+        </div>
+        <div class="vz-field">
+          <label style="display:flex;align-items:center;gap:.5rem;text-transform:none;font-size:.82rem">
+            <input type="checkbox" id="cfgRemember" style="width:auto" checked> Recordar estos datos en este navegador
+          </label>
+        </div>
+        <div class="vz-btn-row">
+          <button class="vz-btn vz-btn-primary" id="btnConnect">Conectar y probar</button>
+          <button class="vz-btn" id="btnForget">Olvidar datos guardados</button>
+        </div>
+        <div class="vz-log" id="connLog"></div>
+      </div>
+    </section>
+
+    <!-- ============ DASHBOARD ============ -->
+    <section class="vz-view is-active" id="view-dashboard">
+      <h1 class="vz-title">Entradas del blog</h1>
+      <p class="vz-sub">Vocero del Zócalo — todo lo publicado vive en <code>blog/posts.json</code> y se regenera automáticamente al guardar.</p>
+      <div id="dashGate" class="vz-alert">Todavía no te has conectado a GitHub. Ve a <strong>Conexión</strong> en el menú para empezar.</div>
+      <div class="vz-card" id="dashCard" style="display:none">
+        <div class="vz-btn-row" style="margin-top:0;margin-bottom:1.2rem">
+          <button class="vz-btn vz-btn-primary" id="btnNewFromDash">+ Nueva entrada</button>
+          <button class="vz-btn" id="btnRefreshList">Actualizar lista</button>
+        </div>
+        <table class="vz-table">
+          <thead><tr><th>Título</th><th>Categoría</th><th>Fecha</th><th>Estado</th><th></th></tr></thead>
+          <tbody id="postsTableBody"></tbody>
+        </table>
+        <p class="vz-sub" id="emptyPostsMsg" style="display:none;margin-top:1rem">Todavía no hay entradas — crea la primera con "Nueva entrada".</p>
+      </div>
+    </section>
+
+    <!-- ============ EDITOR ============ -->
+    <section class="vz-view" id="view-editor">
+      <h1 class="vz-title" id="editorTitle">Nueva entrada</h1>
+      <p class="vz-sub">Cada entrada, al publicarse, genera su propia página HTML, se agrega a la portada del blog y al sitemap — todo en el mismo commit.</p>
+      <div id="editorGate" class="vz-alert">Conéctate a GitHub primero, en el menú lateral.</div>
+
+      <div id="editorForm" style="display:none">
+        <div class="vz-card">
+          <div class="vz-field">
+            <label>Título</label>
+            <input type="text" id="fTitle" placeholder="Título de la entrada">
+          </div>
+          <div class="vz-field">
+            <label>URL (slug)</label>
+            <input type="text" id="fSlug" placeholder="se-genera-solo-del-titulo">
+            <p class="vz-hint" id="slugPreview"></p>
+          </div>
+          <div class="vz-row">
+            <div class="vz-field">
+              <label>Categoría</label>
+              <input type="text" id="fCategory" list="categoryList" placeholder="p.ej. Guías, Cultura...">
+              <datalist id="categoryList"></datalist>
+            </div>
+            <div class="vz-field">
+              <label>Fecha</label>
+              <input type="date" id="fDate">
+            </div>
+          </div>
+          <div class="vz-field">
+            <label>Etiquetas (separadas por coma)</label>
+            <input type="text" id="fTags" placeholder="Zócalo, Centro Histórico, guías">
+          </div>
+          <div class="vz-field">
+            <label>Extracto (para la tarjeta del blog)</label>
+            <textarea id="fExcerpt" maxlength="220"></textarea>
+            <div class="vz-counter" id="excerptCounter">0 / 200</div>
+          </div>
+          <div class="vz-field">
+            <label>Meta descripción (SEO)</label>
+            <textarea id="fMeta" maxlength="170"></textarea>
+            <div class="vz-counter" id="metaCounter">0 / 160</div>
+          </div>
+          <div class="vz-field">
+            <label>Imagen de portada</label>
+            <div class="vz-cover-preview" id="coverPreview">Sin imagen</div>
+            <input type="file" id="fCoverFile" accept="image/*">
+            <p class="vz-hint">JPG o PNG recomendado. Se sube a <code>images/blog/</code> con el nombre del slug.</p>
+          </div>
+          <div class="vz-field">
+            <label style="display:flex;align-items:center;gap:.5rem;text-transform:none;font-size:.82rem">
+              <input type="checkbox" id="fPublished" style="width:auto" checked> Publicado (visible en el blog y el sitemap)
+            </label>
+          </div>
+        </div>
+
+        <div class="vz-card">
+          <label style="display:block;font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:var(--nogal);margin-bottom:.6rem;font-weight:500">Cuerpo del artículo</label>
+          <div class="vz-tabs">
+            <button id="tabVisual" class="is-active">Visual</button>
+            <button id="tabHtml">HTML</button>
+          </div>
+          <div class="vz-toolbar">
+            <button type="button" data-cmd="bold" title="Negrita"><b>B</b></button>
+            <button type="button" data-cmd="italic" title="Cursiva"><i>I</i></button>
+            <button type="button" data-cmd="h2" title="Subtítulo">H2</button>
+            <button type="button" data-cmd="h3" title="Subtítulo menor">H3</button>
+            <button type="button" data-cmd="p" title="Párrafo">¶</button>
+            <button type="button" data-cmd="quote" title="Cita">"</button>
+            <button type="button" data-cmd="ul" title="Lista">•</button>
+            <button type="button" data-cmd="link" title="Enlace">🔗</button>
+          </div>
+          <div class="vz-editor" id="bodyEditor" contenteditable="true"></div>
+          <textarea class="vz-html-raw" id="bodyHtmlRaw" spellcheck="false"></textarea>
+        </div>
+
+        <div class="vz-btn-row">
+          <button class="vz-btn" id="btnPreview">Vista previa</button>
+          <button class="vz-btn vz-btn-primary" id="btnSave">Publicar</button>
+          <button class="vz-btn vz-btn-danger" id="btnDelete" style="display:none">Eliminar entrada</button>
+        </div>
+        <div class="vz-log" id="editorLog"></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="../blog/build.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  /* ================= CONFIG / STORAGE ================= */
+  var CFG_KEYS = ["vz_owner","vz_repo","vz_branch","vz_token"];
+  function loadCfg(){
+    var store = localStorage.getItem("vz_owner") !== null ? localStorage : sessionStorage;
+    return {
+      owner: store.getItem("vz_owner") || "",
+      repo: store.getItem("vz_repo") || "",
+      branch: store.getItem("vz_branch") || "main",
+      token: store.getItem("vz_token") || ""
+    };
+  }
+  function saveCfg(cfg, remember){
+    var store = remember ? localStorage : sessionStorage;
+    var other = remember ? sessionStorage : localStorage;
+    CFG_KEYS.forEach(function(k){ other.removeItem(k); });
+    store.setItem("vz_owner", cfg.owner);
+    store.setItem("vz_repo", cfg.repo);
+    store.setItem("vz_branch", cfg.branch);
+    store.setItem("vz_token", cfg.token);
+  }
+  function forgetCfg(){
+    CFG_KEYS.forEach(function(k){ localStorage.removeItem(k); sessionStorage.removeItem(k); });
+  }
+
+  var state = { cfg: loadCfg(), connected: false, posts: null, editingSlug: null };
+
+  /* ================= GITHUB API ================= */
+  function apiBase(){ return "https://api.github.com/repos/" + state.cfg.owner + "/" + state.cfg.repo + "/contents/"; }
+
+  function b64EncodeUnicode(str){
+    var bytes = new TextEncoder().encode(str);
+    var binary = "";
+    bytes.forEach(function(b){ binary += String.fromCharCode(b); });
+    return btoa(binary);
+  }
+  function b64DecodeUnicode(b64){
+    var binary = atob(b64.replace(/\n/g,""));
+    var bytes = new Uint8Array(binary.length);
+    for (var i=0;i<binary.length;i++) bytes[i] = binary.charCodeAt(i);
+    return new TextDecoder().decode(bytes);
+  }
+
+  function ghRequest(method, path, body){
+    return fetch(apiBase() + path + (method === "GET" ? "?ref=" + encodeURIComponent(state.cfg.branch) : ""), {
+      method: method,
+      headers: {
+        "Authorization": "token " + state.cfg.token,
+        "Accept": "application/vnd.github+json"
+      },
+      body: body ? JSON.stringify(body) : undefined
+    }).then(function(res){
+      if (res.status === 404) return null;
+      if (!res.ok) return res.json().then(function(j){ throw new Error((j && j.message) || ("Error " + res.status)); });
+      return res.json();
+    });
+  }
+
+  function ghGetFile(path){
+    return ghRequest("GET", path).then(function(json){
+      if (!json) return null;
+      return { sha: json.sha, content: b64DecodeUnicode(json.content) };
+    });
+  }
+  function ghPutText(path, text, message, sha){
+    return ghRequest("PUT", path, {
+      message: message, branch: state.cfg.branch, sha: sha || undefined,
+      content: b64EncodeUnicode(text)
+    });
+  }
+  function ghPutBase64(path, base64, message, sha){
+    return ghRequest("PUT", path, {
+      message: message, branch: state.cfg.branch, sha: sha || undefined,
+      content: base64
+    });
+  }
+  function ghDeleteFile(path, message, sha){
+    return ghRequest("DELETE", path, { message: message, branch: state.cfg.branch, sha: sha });
+  }
+
+  /* ================= LOG HELPERS ================= */
+  function log(el, msg, cls){
+    el.classList.add("is-visible");
+    var line = document.createElement("div");
+    if (cls) line.className = cls;
+    line.textContent = msg;
+    el.appendChild(line);
+    el.scrollTop = el.scrollHeight;
+  }
+  function clearLog(el){ el.innerHTML = ""; el.classList.remove("is-visible"); }
+
+  /* ================= NAV ================= */
+  var views = { dashboard: document.getElementById("view-dashboard"), editor: document.getElementById("view-editor"), settings: document.getElementById("view-settings") };
+  var navButtons = document.querySelectorAll("#mainNav button");
+  function showView(name){
+    Object.keys(views).forEach(function(k){ views[k].classList.toggle("is-active", k === name); });
+    navButtons.forEach(function(b){ b.classList.toggle("is-active", b.dataset.view === name); });
+    if (name === "dashboard") refreshDashboard();
+    if (name === "settings") fillSettingsForm();
+  }
+  navButtons.forEach(function(b){ b.addEventListener("click", function(){ showView(b.dataset.view); }); });
+
+  /* ================= SETTINGS VIEW ================= */
+  var connBadge = document.getElementById("connBadge");
+  function fillSettingsForm(){
+    document.getElementById("cfgOwner").value = state.cfg.owner;
+    document.getElementById("cfgRepo").value = state.cfg.repo;
+    document.getElementById("cfgBranch").value = state.cfg.branch || "main";
+    document.getElementById("cfgToken").value = state.cfg.token;
+    connBadge.innerHTML = state.connected
+      ? '<p class="vz-badge-conn">Conectado a ' + state.cfg.owner + "/" + state.cfg.repo + " (" + state.cfg.branch + ")</p>"
+      : "";
+  }
+
+  document.getElementById("btnConnect").addEventListener("click", function(){
+    var logEl = document.getElementById("connLog");
+    clearLog(logEl);
+    state.cfg = {
+      owner: document.getElementById("cfgOwner").value.trim(),
+      repo: document.getElementById("cfgRepo").value.trim(),
+      branch: document.getElementById("cfgBranch").value.trim() || "main",
+      token: document.getElementById("cfgToken").value.trim()
+    };
+    if (!state.cfg.owner || !state.cfg.repo || !state.cfg.token){
+      log(logEl, "Faltan datos: usuario, repositorio y token son obligatorios.", "err");
+      return;
+    }
+    log(logEl, "Probando conexión con " + state.cfg.owner + "/" + state.cfg.repo + "...");
+    ghGetFile("blog/posts.json").then(function(file){
+      state.connected = true;
+      saveCfg(state.cfg, document.getElementById("cfgRemember").checked);
+      if (!file){
+        log(logEl, "Conectado. No encontré blog/posts.json todavía — se creará al publicar tu primera entrada.", "ok");
+      } else {
+        var arr = JSON.parse(file.content);
+        log(logEl, "Conectado correctamente. " + arr.length + " entrada(s) encontradas.", "ok");
+      }
+      fillSettingsForm();
+    }).catch(function(err){
+      state.connected = false;
+      log(logEl, "No se pudo conectar: " + err.message, "err");
+    });
+  });
+
+  document.getElementById("btnForget").addEventListener("click", function(){
+    forgetCfg();
+    state.cfg = { owner:"", repo:"", branch:"main", token:"" };
+    state.connected = false;
+    fillSettingsForm();
+    var logEl = document.getElementById("connLog");
+    clearLog(logEl);
+    log(logEl, "Datos olvidados en este navegador.", "ok");
+  });
+
+  /* ================= DASHBOARD ================= */
+  function requireConnection(gateEl, contentEl){
+    if (!state.cfg.owner || !state.cfg.repo || !state.cfg.token){
+      gateEl.style.display = "block";
+      if (contentEl) contentEl.style.display = "none";
+      return false;
+    }
+    gateEl.style.display = "none";
+    if (contentEl) contentEl.style.display = "block";
+    return true;
+  }
+
+  function loadManifest(){
+    return ghGetFile("blog/posts.json").then(function(file){
+      if (!file) return { posts: [], sha: null };
+      return { posts: JSON.parse(file.content), sha: file.sha };
+    });
+  }
+
+  function refreshDashboard(){
+    var gate = document.getElementById("dashGate");
+    var card = document.getElementById("dashCard");
+    if (!requireConnection(gate, card)) return;
+    loadManifest().then(function(res){
+      state.posts = res.posts;
+      renderTable(res.posts);
+      // keep category datalist fresh for the editor too
+      var cats = Array.from(new Set(res.posts.map(function(p){ return p.category; }).filter(Boolean)));
+      var dl = document.getElementById("categoryList");
+      dl.innerHTML = cats.map(function(c){ return '<option value="' + c.replace(/"/g,"") + '">'; }).join("");
+    }).catch(function(err){
+      card.style.display = "none";
+      gate.style.display = "block";
+      gate.textContent = "Error al leer blog/posts.json: " + err.message;
+    });
+  }
+
+  function renderTable(posts){
+    var tbody = document.getElementById("postsTableBody");
+    var empty = document.getElementById("emptyPostsMsg");
+    tbody.innerHTML = "";
+    var sorted = posts.slice().sort(function(a,b){ return a.date < b.date ? 1 : -1; });
+    empty.style.display = sorted.length ? "none" : "block";
+    sorted.forEach(function(p){
+      var tr = document.createElement("tr");
+      tr.innerHTML =
+        "<td>" + escapeHtml(p.title) + "</td>" +
+        "<td>" + escapeHtml(p.category || "—") + "</td>" +
+        "<td>" + escapeHtml(p.date) + "</td>" +
+        "<td><span class=\"vz-pill" + (p.published === false ? " is-draft" : "") + "\">" + (p.published === false ? "Oculto" : "Publicado") + "</span></td>" +
+        "<td class=\"vz-table-actions\"><button data-edit=\"" + p.slug + "\">Editar</button><button data-view-live=\"" + p.slug + "\">Ver</button></td>";
+      tbody.appendChild(tr);
+    });
+    tbody.querySelectorAll("[data-edit]").forEach(function(btn){
+      btn.addEventListener("click", function(){ openEditor(btn.getAttribute("data-edit")); });
+    });
+    tbody.querySelectorAll("[data-view-live]").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        window.open(VZ.SITE_URL + "/blog/posts/" + btn.getAttribute("data-view-live") + ".html", "_blank");
+      });
+    });
+  }
+
+  function escapeHtml(s){
+    return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  }
+
+  document.getElementById("btnRefreshList").addEventListener("click", refreshDashboard);
+  document.getElementById("btnNewFromDash").addEventListener("click", function(){ openEditor(null); showView("editor"); });
+
+  /* ================= EDITOR ================= */
+  var slugManuallyEdited = false;
+  var fTitle = document.getElementById("fTitle"), fSlug = document.getElementById("fSlug");
+  var bodyEditor = document.getElementById("bodyEditor"), bodyRaw = document.getElementById("bodyHtmlRaw");
+  var tabVisual = document.getElementById("tabVisual"), tabHtml = document.getElementById("tabHtml");
+  var currentCoverBase64 = null, currentCoverExt = null, currentCoverPath = null;
+
+  fTitle.addEventListener("input", function(){
+    if (!slugManuallyEdited){
+      fSlug.value = VZ.slugify(fTitle.value);
+    }
+    updateSlugPreview();
+  });
+  fSlug.addEventListener("input", function(){ slugManuallyEdited = true; updateSlugPreview(); });
+  function updateSlugPreview(){
+    document.getElementById("slugPreview").textContent = fSlug.value
+      ? VZ.SITE_URL + "/blog/posts/" + fSlug.value + ".html" : "";
+  }
+
+  function counterWatcher(textareaId, counterId, max){
+    var ta = document.getElementById(textareaId), c = document.getElementById(counterId);
+    ta.addEventListener("input", function(){
+      c.textContent = ta.value.length + " / " + max;
+      c.classList.toggle("is-over", ta.value.length > max);
+    });
+  }
+  counterWatcher("fExcerpt","excerptCounter",200);
+  counterWatcher("fMeta","metaCounter",160);
+
+  tabVisual.addEventListener("click", function(){
+    bodyRaw.classList.remove("is-active"); bodyEditor.classList.remove("is-hidden");
+    tabVisual.classList.add("is-active"); tabHtml.classList.remove("is-active");
+    bodyEditor.innerHTML = bodyRaw.value;
+  });
+  tabHtml.addEventListener("click", function(){
+    bodyRaw.value = bodyEditor.innerHTML.trim();
+    bodyRaw.classList.add("is-active"); bodyEditor.classList.add("is-hidden");
+    tabHtml.classList.add("is-active"); tabVisual.classList.remove("is-active");
+  });
+
+  document.querySelectorAll(".vz-toolbar [data-cmd]").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      bodyEditor.focus();
+      var cmd = btn.getAttribute("data-cmd");
+      if (cmd === "h2") document.execCommand("formatBlock", false, "H2");
+      else if (cmd === "h3") document.execCommand("formatBlock", false, "H3");
+      else if (cmd === "p") document.execCommand("formatBlock", false, "P");
+      else if (cmd === "quote") document.execCommand("formatBlock", false, "BLOCKQUOTE");
+      else if (cmd === "ul") document.execCommand("insertUnorderedList");
+      else if (cmd === "link"){
+        var url = prompt("URL del enlace:", "https://");
+        if (url) document.execCommand("createLink", false, url);
+      } else {
+        document.execCommand(cmd);
+      }
+    });
+  });
+
+  document.getElementById("fCoverFile").addEventListener("change", function(e){
+    var file = e.target.files[0];
+    if (!file) return;
+    currentCoverExt = (file.name.split(".").pop() || "jpg").toLowerCase();
+    var reader = new FileReader();
+    reader.onload = function(){
+      currentCoverBase64 = reader.result.split(",")[1];
+      document.getElementById("coverPreview").innerHTML = '<img src="' + reader.result + '" alt="">';
+    };
+    reader.readAsDataURL(file);
+  });
+
+  function resetEditorForm(){
+    state.editingSlug = null;
+    slugManuallyEdited = false;
+    currentCoverBase64 = null; currentCoverExt = null; currentCoverPath = null;
+    fTitle.value = ""; fSlug.value = ""; fSlug.disabled = false;
+    document.getElementById("fCategory").value = "";
+    document.getElementById("fDate").value = new Date().toISOString().slice(0,10);
+    document.getElementById("fTags").value = "";
+    document.getElementById("fExcerpt").value = "";
+    document.getElementById("fMeta").value = "";
+    document.getElementById("fPublished").checked = true;
+    document.getElementById("coverPreview").innerHTML = "Sin imagen";
+    document.getElementById("fCoverFile").value = "";
+    bodyEditor.innerHTML = "";
+    bodyRaw.value = "";
+    tabVisual.click();
+    document.getElementById("editorTitle").textContent = "Nueva entrada";
+    document.getElementById("btnDelete").style.display = "none";
+    document.getElementById("btnSave").textContent = "Publicar";
+    clearLog(document.getElementById("editorLog"));
+  }
+
+  function openEditor(slug){
+    var gate = document.getElementById("editorGate");
+    var form = document.getElementById("editorForm");
+    if (!requireConnection(gate, form)) { showView("editor"); return; }
+    resetEditorForm();
+    if (!slug) return;
+    var post = (state.posts || []).find(function(p){ return p.slug === slug; });
+    if (!post) return;
+    state.editingSlug = slug;
+    fTitle.value = post.title;
+    fSlug.value = post.slug; fSlug.disabled = true; slugManuallyEdited = true;
+    document.getElementById("fCategory").value = post.category || "";
+    document.getElementById("fDate").value = post.date;
+    document.getElementById("fTags").value = (post.tags || []).join(", ");
+    document.getElementById("fExcerpt").value = post.excerpt || "";
+    document.getElementById("fMeta").value = post.metaDescription || "";
+    document.getElementById("fPublished").checked = post.published !== false;
+    currentCoverPath = post.coverImage;
+    document.getElementById("coverPreview").innerHTML = '<img src="../' + post.coverImage + '" alt="">';
+    bodyEditor.innerHTML = post.bodyHtml || "";
+    bodyRaw.value = post.bodyHtml || "";
+    document.getElementById("editorTitle").textContent = "Editando: " + post.title;
+    document.getElementById("btnDelete").style.display = "inline-flex";
+    document.getElementById("btnSave").textContent = "Guardar cambios";
+    updateSlugPreview();
+  }
+
+  function collectFormAsPost(){
+    var bodyHtml = tabHtml.classList.contains("is-active") ? bodyRaw.value.trim() : bodyEditor.innerHTML.trim();
+    return {
+      slug: fSlug.value.trim(),
+      title: fTitle.value.trim(),
+      category: document.getElementById("fCategory").value.trim(),
+      date: document.getElementById("fDate").value,
+      tags: document.getElementById("fTags").value.split(",").map(function(t){ return t.trim(); }).filter(Boolean),
+      excerpt: document.getElementById("fExcerpt").value.trim(),
+      metaDescription: document.getElementById("fMeta").value.trim(),
+      published: document.getElementById("fPublished").checked,
+      coverImage: currentCoverPath || "images/hero/hero-02-zocalo.jpg",
+      bodyHtml: bodyHtml
+    };
+  }
+
+  function validatePost(p){
+    var errors = [];
+    if (!p.title) errors.push("Falta el título.");
+    if (!p.slug) errors.push("Falta el slug.");
+    if (!p.category) errors.push("Falta la categoría.");
+    if (!p.date) errors.push("Falta la fecha.");
+    if (!p.excerpt) errors.push("Falta el extracto.");
+    if (!p.metaDescription) errors.push("Falta la meta descripción.");
+    if (!p.bodyHtml || p.bodyHtml.length < 20) errors.push("El cuerpo del artículo está vacío o es muy corto.");
+    return errors;
+  }
+
+  document.getElementById("btnPreview").addEventListener("click", function(){
+    var post = collectFormAsPost();
+    if (!post.title || !post.bodyHtml){ alert("Escribe al menos un título y contenido antes de previsualizar."); return; }
+    var html = VZ.buildPostHTML(post);
+    html = html.replace("<head>", '<head>\n<base href="' + VZ.SITE_URL + '/blog/posts/">');
+    var blob = new Blob([html], { type: "text/html" });
+    window.open(URL.createObjectURL(blob), "_blank");
+  });
+
+  document.getElementById("btnSave").addEventListener("click", function(){
+    var logEl = document.getElementById("editorLog");
+    clearLog(logEl);
+    var post = collectFormAsPost();
+    var errors = validatePost(post);
+    if (errors.length){ log(logEl, errors.join(" "), "err"); return; }
+
+    var btn = document.getElementById("btnSave");
+    btn.disabled = true;
+    var isNew = !state.editingSlug;
+    var commitTag = isNew ? "Publica" : "Actualiza";
+
+    log(logEl, "Leyendo blog/posts.json...");
+    loadManifest().then(function(res){
+      var posts = res.posts;
+      if (isNew && posts.some(function(p){ return p.slug === post.slug; })){
+        throw new Error("Ya existe una entrada con ese slug. Cambia el título o el slug.");
+      }
+      var idx = posts.findIndex(function(p){ return p.slug === post.slug; });
+
+      var uploadStep = Promise.resolve();
+      if (currentCoverBase64){
+        var coverPath = "images/blog/" + post.slug + "." + currentCoverExt;
+        log(logEl, "Subiendo imagen de portada...");
+        uploadStep = ghGetFile(coverPath).then(function(existing){
+          return ghPutBase64(coverPath, currentCoverBase64, "Vocero del Zócalo: imagen de portada — " + post.title, existing ? existing.sha : undefined);
+        }).then(function(){
+          post.coverImage = coverPath;
+          log(logEl, "Imagen subida a " + coverPath + ".", "ok");
+        });
+      }
+
+      return uploadStep.then(function(){
+        if (idx >= 0) posts[idx] = post; else posts.push(post);
+
+        log(logEl, "Guardando blog/posts.json...");
+        return ghPutText("blog/posts.json", JSON.stringify(posts, null, 2),
+          "Vocero del Zócalo: " + commitTag.toLowerCase() + " '" + post.title + "'", res.sha)
+        .then(function(){
+          log(logEl, "posts.json actualizado.", "ok");
+          log(logEl, "Generando página del artículo...");
+          return ghGetFile("blog/posts/" + post.slug + ".html");
+        }).then(function(existingPost){
+          return ghPutText("blog/posts/" + post.slug + ".html", VZ.buildPostHTML(post),
+            "Vocero del Zócalo: " + commitTag.toLowerCase() + " '" + post.title + "'",
+            existingPost ? existingPost.sha : undefined);
+        }).then(function(){
+          log(logEl, "Página del artículo publicada.", "ok");
+          log(logEl, "Actualizando portada del blog...");
+          return ghGetFile("blog/index.html");
+        }).then(function(existingIndex){
+          return ghPutText("blog/index.html", VZ.buildIndexHTML(posts),
+            "Vocero del Zócalo: actualiza portada del blog",
+            existingIndex ? existingIndex.sha : undefined);
+        }).then(function(){
+          log(logEl, "Portada del blog actualizada.", "ok");
+          log(logEl, "Actualizando sitemap.xml...");
+          return ghGetFile("sitemap.xml");
+        }).then(function(existingSitemap){
+          return ghPutText("sitemap.xml", VZ.buildSitemapXML(posts),
+            "Vocero del Zócalo: actualiza sitemap",
+            existingSitemap ? existingSitemap.sha : undefined);
+        }).then(function(){
+          log(logEl, "Sitemap actualizado.", "ok");
+          log(logEl, "¡Listo! Debería verse en unos segundos en: " + VZ.SITE_URL + "/blog/posts/" + post.slug + ".html", "ok");
+          state.posts = posts;
+          state.editingSlug = post.slug;
+          fSlug.disabled = true;
+          document.getElementById("editorTitle").textContent = "Editando: " + post.title;
+          document.getElementById("btnDelete").style.display = "inline-flex";
+          document.getElementById("btnSave").textContent = "Guardar cambios";
+        });
+      });
+    }).catch(function(err){
+      log(logEl, "Error: " + err.message, "err");
+    }).finally(function(){
+      btn.disabled = false;
+    });
+  });
+
+  document.getElementById("btnDelete").addEventListener("click", function(){
+    if (!state.editingSlug) return;
+    if (!confirm('¿Eliminar la entrada "' + fTitle.value + '"? Esto la quita del blog, del sitemap y borra su página. No se puede deshacer.')) return;
+
+    var logEl = document.getElementById("editorLog");
+    clearLog(logEl);
+    var slug = state.editingSlug;
+    var btn = document.getElementById("btnDelete");
+    btn.disabled = true;
+
+    log(logEl, "Leyendo blog/posts.json...");
+    loadManifest().then(function(res){
+      var posts = res.posts;
+      var removed = posts.find(function(p){ return p.slug === slug; });
+      posts = posts.filter(function(p){ return p.slug !== slug; });
+
+      log(logEl, "Actualizando blog/posts.json...");
+      return ghPutText("blog/posts.json", JSON.stringify(posts, null, 2),
+        "Vocero del Zócalo: elimina '" + (removed ? removed.title : slug) + "'", res.sha)
+      .then(function(){
+        log(logEl, "Borrando página del artículo...");
+        return ghGetFile("blog/posts/" + slug + ".html");
+      }).then(function(existingPost){
+        if (!existingPost) return;
+        return ghDeleteFile("blog/posts/" + slug + ".html", "Vocero del Zócalo: elimina página de '" + slug + "'", existingPost.sha);
+      }).then(function(){
+        log(logEl, "Actualizando portada del blog...");
+        return ghGetFile("blog/index.html");
+      }).then(function(existingIndex){
+        return ghPutText("blog/index.html", VZ.buildIndexHTML(posts),
+          "Vocero del Zócalo: actualiza portada tras eliminar entrada",
+          existingIndex ? existingIndex.sha : undefined);
+      }).then(function(){
+        log(logEl, "Actualizando sitemap.xml...");
+        return ghGetFile("sitemap.xml");
+      }).then(function(existingSitemap){
+        return ghPutText("sitemap.xml", VZ.buildSitemapXML(posts),
+          "Vocero del Zócalo: actualiza sitemap tras eliminar entrada",
+          existingSitemap ? existingSitemap.sha : undefined);
+      }).then(function(){
+        log(logEl, "Entrada eliminada.", "ok");
+        state.posts = posts;
+        setTimeout(function(){ showView("dashboard"); }, 700);
+      });
+    }).catch(function(err){
+      log(logEl, "Error: " + err.message, "err");
+    }).finally(function(){
+      btn.disabled = false;
+    });
+  });
+
+  /* ================= INIT ================= */
+  state.connected = !!(state.cfg.owner && state.cfg.repo && state.cfg.token);
+  fillSettingsForm();
+  showView("dashboard");
+})();
+</script>
+</body>
+</html>

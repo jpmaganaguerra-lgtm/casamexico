@@ -11,9 +11,10 @@ separado).
 
 ```
 casa-mexico-website/
-├── index.html              → único HTML del sitio (una sola página)
+├── index.html              → home del sitio (una sola página)
 ├── css/
-│   └── style.css           → todos los estilos (antes estaban en <style> inline)
+│   ├── style.css           → todos los estilos del home (antes estaban en <style> inline)
+│   └── blog.css            → estilos del blog (portada + artículos), extiende style.css
 ├── js/
 │   └── script.js           → animaciones, carrusel del hero, menú (antes <script> inline)
 ├── images/
@@ -23,7 +24,17 @@ casa-mexico-website/
 │   ├── momentos/            → 3 fotos de "cada hora tiene su luz"
 │   ├── suites/               → 4 fotos, una por tipo de suite
 │   ├── refugio/              → foto de acceso a "El Refugio"
-│   └── cierre/               → foto del cierre / CTA final
+│   ├── cierre/               → foto del cierre / CTA final
+│   └── blog/                 → portadas de los artículos (las sube el backoffice)
+├── blog/
+│   ├── index.html           → portada de "Vocero del Zócalo" (se regenera sola)
+│   ├── posts.json           → fuente de verdad: todas las entradas del blog
+│   ├── build.js             → motor que genera el HTML de cada entrada/portada/sitemap
+│   ├── build-site.js        → script de Node para regenerar todo localmente
+│   └── posts/
+│       └── <slug>.html       → una página HTML por entrada (se generan solas)
+├── admin/
+│   └── index.html           → backoffice "Vocero del Zócalo" (publicar/editar/borrar entradas)
 ├── robots.txt
 ├── sitemap.xml
 └── README.md
@@ -58,6 +69,101 @@ estructurados, sitemap y robots.txt) ya apuntan a `https://www.lacasamexico.com/
 
 ---
 
+## El blog: Vocero del Zócalo
+
+Es un blog pensado para SEO y GEO (que los motores de IA como ChatGPT,
+Perplexity o Google AI Overviews puedan citar a Casa México): crónicas,
+guías y cultura del Centro Histórico, con contenido que atrae búsquedas
+que van más allá de "hotel en el Zócalo" — "qué ver en el Centro
+Histórico", "speakeasy CDMX", "dónde hospedarse cerca del Zócalo" — y
+que además reduce la dependencia de Airbnb al traer tráfico directo.
+
+Arranca con 3 artículos ya publicados (`blog/posts.json`):
+1. **La ruta esencial para recorrer el Centro Histórico alrededor del Zócalo**
+2. **La cultura speakeasy en la Ciudad de México: el arte de lo oculto**
+3. **Guía práctica para hospedarte en el Centro Histórico de la Ciudad de México**
+
+Cada entrada es una página HTML independiente — nada de JavaScript
+renderizando el contenido en el navegador — para que cualquier buscador
+o IA que rastree el sitio pueda leerla directamente, sin ejecutar nada.
+Cada una trae su propio título, meta descripción, Open Graph y datos
+estructurados `BlogPosting` (Schema.org).
+
+### Cómo funciona por dentro
+
+`blog/posts.json` es la única fuente de verdad: un arreglo con todas las
+entradas (título, slug, extracto, meta descripción, categoría, etiquetas,
+imagen de portada, fecha, y el cuerpo en HTML). A partir de ahí,
+`blog/build.js` genera:
+- `blog/posts/<slug>.html` — la página de cada entrada
+- `blog/index.html` — la portada del blog, con las tarjetas de todas las entradas
+- `sitemap.xml` — con la home, la portada del blog y cada entrada
+
+Si alguna vez quieres regenerar todo a mano después de editar
+`posts.json` directamente (sin pasar por el backoffice), corres:
+
+```bash
+node blog/build-site.js
+```
+
+Necesitas tener [Node.js](https://nodejs.org) instalado; no usa ninguna
+librería externa.
+
+## El backoffice (`/admin/`)
+
+Es el panel para publicar, editar y borrar entradas del blog sin tocar
+código. No tiene servidor propio: es una sola página HTML que, al
+guardar, hace commits directo a tu repositorio de GitHub usando su API
+— por eso cualquier cambio se ve reflejado en el sitio en cuanto GitHub
+Pages (o el hosting que uses) vuelve a desplegar, normalmente en
+segundos.
+
+### Cómo entrar por primera vez
+
+1. Abre `tudominio.com/admin/` (no está enlazado desde el menú del
+   sitio ni indexado por buscadores — `robots.txt` lo excluye — pero
+   cualquiera con el link puede *verlo*; lo que de verdad lo protege es
+   que sin un token válido con permiso de escritura sobre tu repo, no
+   se puede publicar nada).
+2. Ve a GitHub → tu ícono de perfil → **Settings** → **Developer
+   settings** → **Fine-grained tokens** → **Generate new token**.
+   - **Repository access:** solo el repositorio de este sitio.
+   - **Permissions:** `Contents` → **Read and write**.
+   - Cópialo — GitHub solo te lo muestra una vez.
+3. En la pestaña **Conexión** del backoffice, llena usuario/organización
+   de GitHub, nombre del repositorio, la rama (`main` normalmente) y
+   pega el token. "Conectar y probar" confirma que todo esté bien.
+4. Marca "Recordar estos datos en este navegador" si es una computadora
+   de confianza — así no tienes que volver a pegar el token cada vez.
+   Si es una compu compartida, mejor déjalo sin marcar.
+
+### Publicar una entrada
+
+En **Entradas** → **+ Nueva entrada**: título (el slug/URL se genera
+solo, pero lo puedes editar antes de guardar — después de la primera
+publicación queda fijo, para no romper el link), categoría, fecha,
+etiquetas, extracto, meta descripción, imagen de portada, y el cuerpo
+del artículo con un editor simple (negrita, cursiva, subtítulos, listas,
+citas, enlaces) o directamente en HTML si lo prefieres (pestaña "HTML").
+"Vista previa" abre el artículo tal cual se va a ver, sin publicar nada
+todavía. "Publicar" hace los commits: sube la imagen, guarda
+`posts.json`, crea la página del artículo, actualiza la portada del
+blog y el sitemap — los cuatro pasos en una sola operación, con una
+bitácora en pantalla de cada uno.
+
+Editar o eliminar una entrada existente funciona igual, desde
+**Entradas** → **Editar**.
+
+### Una nota sobre seguridad
+
+El token que generas en GitHub es, en la práctica, la contraseña de
+este backoffice: quien lo tenga puede publicar en tu nombre. Trátalo
+como tal — no lo compartas por mensaje de texto o correo sin cifrar, y
+si alguna vez crees que se filtró, revócalo desde GitHub (Settings →
+Developer settings → el token en cuestión → Delete) y genera uno nuevo.
+
+---
+
 ## Respuestas a tus preguntas de SEO / GEO
 
 **¿Cómo estaba la estrategia de SEO y GEO? ¿Estaba optimizada?**
@@ -87,9 +193,11 @@ respuestas directas ("¿cuántas suites tiene Casa México?", "¿está cerca
 del Zócalo?"), y reforzaría aún más el GEO.
 
 **¿Tienes sitemap XML?**
-No lo tenía — ya está creado (`sitemap.xml`). Como es una sola página,
-solo tiene una URL; su valor real es que Search Console lo pueda leer
-para confirmar que la página existe y cuándo se actualizó.
+No lo tenías — ya está creado (`sitemap.xml`), y ahora se regenera solo
+cada vez que publicas, editas o borras una entrada del blog desde el
+backoffice (home + portada del blog + cada artículo). Su valor real es
+que Search Console lo pueda leer para confirmar qué páginas existen y
+cuándo se actualizó cada una.
 
 **¿Tienes que subirlo a Google Search Console?**
 Sí, es recomendable. Pasos, una vez que el sitio esté publicado en su
@@ -118,3 +226,7 @@ Ambos están dentro de los límites que Google no trunca (~60 caracteres
 para el title, ~155-160 para la description), así que los dejé igual;
 solo les añadí su versión "social" (Open Graph/Twitter) para que se vean
 igual de bien cuando se comparten fuera de Google.
+
+Las entradas del blog sí llevan su propio título y meta descripción
+cada una — se escriben al momento de publicar, directamente en el
+backoffice (los campos "Título" y "Meta descripción" del editor).

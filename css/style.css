@@ -24,7 +24,7 @@ nav.scrolled{background:rgba(243,239,232,.96);backdrop-filter:blur(16px);padding
 nav.scrolled .nav-logo-mark{filter:brightness(0);opacity:.7}
 .nav-logo-text{font-family:var(--serif);font-size:1rem;font-weight:500;letter-spacing:.12em;color:var(--hueso);text-transform:uppercase;transition:color .4s}
 nav.scrolled .nav-logo-text{color:var(--cafe)}
-.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links{display:flex;gap:2rem;list-style:none}
 .nav-links a{color:rgba(243,239,232,.85);text-decoration:none;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;font-weight:400;transition:color .4s}
 .nav-links a:hover{color:var(--hueso)}
 nav.scrolled .nav-links a{color:var(--nogal)}
@@ -147,6 +147,10 @@ section{padding:6rem 0}
 .cierre-ctas{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
 .btn-wa{display:inline-flex;align-items:center;gap:.6rem;background:transparent;border:.5px solid rgba(243,239,232,.35);color:rgba(243,239,232,.7);padding:.9rem 2rem;font-family:var(--sans);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:all .2s}
 .btn-wa:hover{border-color:var(--hueso);color:var(--hueso)}
+.btn-wa-float{position:fixed;left:1.6rem;bottom:1.6rem;z-index:999;width:56px;height:56px;border-radius:50%;background:var(--musgo);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(47,41,37,.25);transition:background .25s,transform .25s}
+.btn-wa-float:hover{background:var(--terracota);transform:translateY(-2px)}
+.btn-wa-float svg{width:26px;height:26px}
+@media (max-width:640px){.btn-wa-float{left:1.1rem;bottom:1.1rem;width:50px;height:50px}.btn-wa-float svg{width:23px;height:23px}}
 
 /* FOOTER */
 footer{background:var(--cafe);padding:5rem 0 3rem}
@@ -159,6 +163,7 @@ footer{background:var(--cafe);padding:5rem 0 3rem}
 .footer-links li{margin-bottom:.7rem}
 .footer-links a{font-size:.78rem;color:rgba(243,239,232,.3);text-decoration:none;transition:color .2s;font-weight:300}
 .footer-links a:hover{color:rgba(243,239,232,.7)}
+.footer-phone{display:inline-flex;align-items:center;gap:.5rem}
 .footer-bottom{border-top:.5px solid rgba(243,239,232,.06);padding-top:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
 .footer-copy{font-size:.68rem;color:rgba(243,239,232,.2);font-weight:300}
 .footer-seo{display:flex;flex-wrap:wrap;gap:.8rem}
