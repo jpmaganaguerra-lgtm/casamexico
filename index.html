@@ -44,22 +44,129 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   "@context": "https://schema.org",
   "@type": "Hotel",
   "name": "Casa México Suites",
-  "description": "Hotel boutique de diez suites privadas frente al Zócalo, en el Centro Histórico de la Ciudad de México.",
-  "image": "https://www.lacasamexico.com/images/hero/hero-02-zocalo.jpg",
+  "description": "Hotel boutique speakeasy de diez suites privadas frente al Zócalo, en el Centro Histórico de la Ciudad de México. Diseño con materiales prehispánicos: tezontle, jadeíta y obsidiana.",
+  "image": [
+    "https://www.lacasamexico.com/images/hero/hero-02-zocalo.jpg",
+    "https://www.lacasamexico.com/images/momentos/momento-01-amanecer.jpg",
+    "https://www.lacasamexico.com/images/suites/suite-king.jpg"
+  ],
   "url": "https://www.lacasamexico.com/",
   "telephone": "+52-55-1821-4245",
+  "email": "hola@casamexicohotel.mx",
   "priceRange": "$$$",
+  "numberOfRooms": 10,
+  "checkinTime": "15:00",
+  "checkoutTime": "12:00",
+  "starRating": {
+    "@type": "Rating",
+    "ratingValue": "4"
+  },
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Centro Histórico",
     "addressLocality": "Ciudad de México",
-    "addressRegion": "CDMX",
+    "addressRegion": "Ciudad de México",
+    "postalCode": "06000",
     "addressCountry": "MX"
   },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 19.4326,
+    "longitude": -99.1332
+  },
+  "hasMap": "https://maps.google.com/?q=Zocalo+Centro+Historico+Ciudad+de+Mexico",
   "amenityFeature": [
-    { "@type": "LocationFeatureSpecification", "name": "Vista al Zócalo" },
-    { "@type": "LocationFeatureSpecification", "name": "Diseño boutique" },
-    { "@type": "LocationFeatureSpecification", "name": "Reservación directa" }
+    { "@type": "LocationFeatureSpecification", "name": "Vista al Zócalo", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Acceso speakeasy exclusivo", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Diseño boutique con materiales prehispánicos", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Reservación directa sin intermediarios", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "WhatsApp Concierge", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "A 2 minutos del Palacio Nacional", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "A 2 minutos de la Catedral Metropolitana", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "A 4 minutos del Templo Mayor", "value": true }
+  ],
+  "sameAs": [
+    "https://www.instagram.com/casamexicosuites",
+    "https://www.facebook.com/casamexicosuites"
+  ],
+  "containsPlace": [
+    {
+      "@type": "HotelRoom",
+      "name": "Suite King",
+      "description": "Vista panorámica privada frente a la Plaza de la Constitución. La experiencia más privilegiada del hotel.",
+      "floorSize": { "@type": "QuantitativeValue", "value": 25, "unitCode": "MTK" },
+      "bed": { "@type": "BedDetails", "numberOfBeds": 1, "typeOfBed": "King" }
+    },
+    {
+      "@type": "HotelRoom",
+      "name": "Suite Double Queen",
+      "description": "Vista privilegiada al Centro Histórico con balcón privado sobre la arquitectura colonial.",
+      "floorSize": { "@type": "QuantitativeValue", "value": 22, "unitCode": "MTK" },
+      "bed": { "@type": "BedDetails", "numberOfBeds": 2, "typeOfBed": "Queen" }
+    },
+    {
+      "@type": "HotelRoom",
+      "name": "Master Suite Double Queen",
+      "description": "Diseño contemporáneo con los materiales emblemáticos de Casa México: tezontle, jadeíta y nogal.",
+      "floorSize": { "@type": "QuantitativeValue", "value": 30, "unitCode": "MTK" },
+      "bed": { "@type": "BedDetails", "numberOfBeds": 2, "typeOfBed": "Queen" }
+    },
+    {
+      "@type": "HotelRoom",
+      "name": "Suite JR Queen",
+      "description": "La experiencia más exclusiva de Casa México. Concebida para quienes buscan lo extraordinario.",
+      "floorSize": { "@type": "QuantitativeValue", "value": 20, "unitCode": "MTK" },
+      "bed": { "@type": "BedDetails", "numberOfBeds": 1, "typeOfBed": "Queen" }
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Dónde está ubicado Casa México?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Casa México está ubicado en el Centro Histórico de la Ciudad de México, frente al Zócalo (Plaza de la Constitución), a 2 minutos a pie del Palacio Nacional y la Catedral Metropolitana, y a 4 minutos del Templo Mayor."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuántas suites tiene Casa México?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Casa México cuenta con 10 suites privadas, incluyendo Suite King (25 m²), Suite Double Queen (22 m²), Master Suite Double Queen (30 m²) y Suite JR Queen (20 m²)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué hace especial a Casa México?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Casa México es el único hotel speakeasy boutique frente al Zócalo de la Ciudad de México. Su acceso es discreto y exclusivo, y su diseño está inspirado en materiales prehispánicos: tezontle, jadeíta, basalto y obsidiana. Ofrece reservación directa con la mejor tarifa garantizada."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuál es el horario de check-in y check-out?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "El check-in es a partir de las 15:00 horas y el check-out es hasta las 12:00 horas."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cómo reservar en Casa México?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Puedes reservar directamente en lacasamexico.com para obtener la mejor tarifa, o contactarnos por WhatsApp al +52 55 4349 6735. También puedes escribirnos a hola@casamexicohotel.mx."
+      }
+    }
   ]
 }
 </script>
@@ -98,7 +205,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <p class="hero-eyebrow">Centro Histórico · Ciudad de México</p>
-    <h1 class="hero-hl">México<br>desde la<br><em>primera fila.</em></h1>
+    <h1 class="sr-only">Casa México — Hotel Boutique Speakeasy frente al Zócalo, Centro Histórico Ciudad de México</h1>
+    <p class="hero-hl" aria-hidden="true">México<br>desde la<br><em>primera fila.</em></p>
     <p class="hero-sub">Diez suites privadas suspendidas sobre el corazón histórico de la Ciudad de México.</p>
     <div class="hero-actions">
       <a href="#reservar" class="btn-primary">Reservar ahora</a>
@@ -151,7 +259,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <h2 class="section-title reveal">Cada hora<br>tiene su <em>luz.</em></h2>
     <div class="momentos-grid reveal">
       <div class="momento-item">
-        <img src="images/momentos/momento-01-amanecer.jpg" alt="Amanecer sobre el Zócalo">
+        <img src="images/momentos/momento-01-amanecer.jpg" alt="Amanecer sobre el Zócalo de la Ciudad de México visto desde Casa México Hotel Boutique">
         <div class="momento-overlay"></div>
         <div class="momento-caption">
           <span class="momento-label">Amanecer</span>
@@ -159,7 +267,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
       <div class="momento-item">
-        <img src="images/momentos/momento-02-tarde.jpg" alt="La tarde en el Centro Histórico">
+        <img src="images/momentos/momento-02-tarde.jpg" alt="Tarde en el Centro Histórico de la Ciudad de México — vista desde Casa México">
         <div class="momento-overlay"></div>
         <div class="momento-caption">
           <span class="momento-label">Tarde</span>
@@ -167,7 +275,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
       <div class="momento-item">
-        <img src="images/momentos/momento-03-noche.jpg" alt="El Centro Histórico iluminado de noche">
+        <img src="images/momentos/momento-03-noche.jpg" alt="Centro Histórico de la Ciudad de México iluminado de noche — Casa México speakeasy hotel">
         <div class="momento-overlay"></div>
         <div class="momento-caption">
           <span class="momento-label">Noche</span>
@@ -191,7 +299,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="suites-grid reveal">
       <a href="#reservar" class="suite-card">
         <div class="suite-img">
-          <img src="images/suites/suite-king.jpg" alt="Suite King">
+          <img src="images/suites/suite-king.jpg" alt="Suite King con vista al Zócalo — Casa México Hotel Boutique Centro Histórico CDMX">
           <div class="suite-img-overlay"></div>
         </div>
         <div class="suite-body">
@@ -206,7 +314,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </a>
       <a href="#reservar" class="suite-card">
         <div class="suite-img">
-          <img src="images/suites/suite-double-queen.jpg" alt="Suite Double Queen">
+          <img src="images/suites/suite-double-queen.jpg" alt="Suite Double Queen con balcón y vista colonial — Hotel Boutique Zócalo Ciudad de México">
           <div class="suite-img-overlay"></div>
         </div>
         <div class="suite-body">
@@ -221,7 +329,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </a>
       <a href="#reservar" class="suite-card">
         <div class="suite-img">
-          <img src="images/suites/master-suite-double-queen.jpg" alt="Master Suite Double Queen">
+          <img src="images/suites/master-suite-double-queen.jpg" alt="Master Suite Double Queen diseño boutique tezontle — Casa México Centro Histórico">
           <div class="suite-img-overlay"></div>
         </div>
         <div class="suite-body">
@@ -236,7 +344,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </a>
       <a href="#reservar" class="suite-card">
         <div class="suite-img">
-          <img src="images/suites/suite-jr-queen.jpg" alt="Suite JR Queen">
+          <img src="images/suites/suite-jr-queen.jpg" alt="Suite JR Queen exclusiva — Hotel Boutique frente al Zócalo CDMX">
           <div class="suite-img-overlay"></div>
         </div>
         <div class="suite-body">
@@ -257,7 +365,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="refugio-section" id="refugio">
   <div class="refugio-grid">
     <div class="refugio-img">
-      <img src="images/refugio/acceso-refugio.jpg" alt="Acceso privado a El Refugio, Casa México">
+      <img src="images/refugio/acceso-refugio.jpg" alt="Acceso privado al lobby de Casa México — Hotel boutique speakeasy en el Zócalo">
     </div>
     <div class="refugio-content">
       <p class="eyebrow" style="color:rgba(243,239,232,.3)" >El Refugio</p>
@@ -314,7 +422,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- CIERRE / RESERVA -->
 <section class="cierre-section" id="reservar">
-  <img class="cierre-img" src="images/cierre/zocalo-noche.jpg" alt="Vista nocturna del Zócalo desde Casa México">
+  <img class="cierre-img" src="images/cierre/zocalo-noche.jpg" alt="Vista nocturna del Zócalo de la Ciudad de México desde Casa México Hotel Boutique">
   <div class="cierre-content">
     <p class="eyebrow" style="color:rgba(243,239,232,.4)">Reserva directa</p>
     <h2 class="cierre-title">Tu lugar en el<br>corazón de <em>México.</em></h2>

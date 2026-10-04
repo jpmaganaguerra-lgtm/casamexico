@@ -225,3 +225,6 @@ footer{background:var(--cafe);padding:5rem 0 3rem}
 #ui-datepicker-div-octorate .ui-datepicker-today a{border:solid 1px var(--terracota) !important}
 #ui-datepicker-div-octorate .ui-datepicker-buttonpane button{font-family:var(--sans) !important;background:var(--hueso) !important}
 #ui-datepicker-div-octorate .ui-datepicker-buttonpane button[data-handler="today"]:hover{color:var(--terracota) !important}
+
+/* Accesibilidad + SEO: texto visible para buscadores, invisible visualmente */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}

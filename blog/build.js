@@ -209,11 +209,16 @@
       "image": absUrl(post.coverImage),
       "datePublished": post.date,
       "dateModified": post.date,
-      "author": { "@type": "Organization", "name": SITE_NAME },
+      "author": { "@type": "Organization", "name": SITE_NAME, "url": absUrl("") },
       "publisher": {
         "@type": "Organization",
         "name": SITE_NAME,
-        "logo": { "@type": "ImageObject", "url": absUrl("images/logo.webp") }
+        "url": absUrl(""),
+        "logo": { "@type": "ImageObject", "url": absUrl("images/logo.webp") },
+        "sameAs": [
+          "https://www.instagram.com/casamexicosuites",
+          "https://www.facebook.com/casamexicosuites"
+        ]
       },
       "mainEntityOfPage": { "@type": "WebPage", "@id": absUrl(canonicalPath) }
     }, null, 2);
