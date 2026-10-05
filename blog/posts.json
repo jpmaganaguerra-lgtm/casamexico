@@ -5,7 +5,12 @@
     "excerpt": "Un recorrido a pie de dos horas entre catedrales, palacios y ruinas mexicas — todo a la distancia de una buena caminata desde el corazón de la ciudad.",
     "metaDescription": "Un recorrido a pie por el Zócalo de la Ciudad de México: Catedral Metropolitana, Palacio Nacional, Templo Mayor y Bellas Artes, contado por Vocero del Zócalo.",
     "category": "Guías",
-    "tags": ["Zócalo", "Centro Histórico", "arquitectura", "qué ver en CDMX"],
+    "tags": [
+      "Zócalo",
+      "Centro Histórico",
+      "arquitectura",
+      "qué ver en CDMX"
+    ],
     "coverImage": "images/momentos/momento-01-amanecer.jpg",
     "date": "2026-09-10",
     "published": true,
@@ -17,7 +22,12 @@
     "excerpt": "Puertas sin letrero, contraseñas que ya no hacen falta y una ciudad que redescubre el placer de lo discreto.",
     "metaDescription": "Por qué los espacios speakeasy están redefiniendo la vida nocturna del Centro Histórico de la Ciudad de México. Una mirada de Vocero del Zócalo.",
     "category": "Cultura",
-    "tags": ["speakeasy", "vida nocturna", "Centro Histórico", "diseño"],
+    "tags": [
+      "speakeasy",
+      "vida nocturna",
+      "Centro Histórico",
+      "diseño"
+    ],
     "coverImage": "images/momentos/momento-03-noche.jpg",
     "date": "2026-09-20",
     "published": true,
@@ -29,10 +39,36 @@
     "excerpt": "Cómo llegar, qué zona conviene y por qué dormir a pasos del Zócalo cambia por completo la forma de conocer la ciudad.",
     "metaDescription": "Cómo llegar, qué zona elegir y por qué hospedarte cerca del Zócalo. Guía práctica de Vocero del Zócalo para tu próxima visita a la Ciudad de México.",
     "category": "Guías de viaje",
-    "tags": ["hospedaje", "Centro Histórico", "guía de viaje", "CDMX"],
+    "tags": [
+      "hospedaje",
+      "Centro Histórico",
+      "guía de viaje",
+      "CDMX"
+    ],
     "coverImage": "images/hero/hero-01-suite-terracota.jpg",
     "date": "2026-09-30",
     "published": true,
     "bodyHtml": "<p>Elegir dónde hospedarse en la Ciudad de México determina, más de lo que parece, cómo se va a conocer la ciudad. Y para quien viene por poco tiempo y quiere caminar tanto como sea posible, el Centro Histórico suele ser la decisión más eficiente — aunque no siempre la más obvia.</p><h2>Cómo llegar desde el aeropuerto</h2><p>Desde el Aeropuerto Internacional de la Ciudad de México, el Centro Histórico está a unos 30-40 minutos en auto sin tráfico, y hasta el doble en horas pico. Las opciones más comunes son taxi autorizado dentro de la terminal, aplicaciones de transporte privado, o el Metro (Línea 5 y transbordos) para quien viaja ligero y con presupuesto ajustado. Para una primera visita, o si se llega con equipaje, taxi autorizado o app suele ser la opción más simple.</p><h2>Por qué el Centro Histórico y no otra zona</h2><p>Zonas como Roma, Condesa o Polanco tienen su propio encanto y una oferta gastronómica muy fuerte, pero exigen trasladarse para conocer el patrimonio histórico de la ciudad. El Centro Histórico funciona al revés: Catedral, Palacio Nacional, Templo Mayor, Bellas Artes y decenas de museos están a distancia caminable entre sí. La otra cara de la moneda es que la vida nocturna y ciertos servicios están más dispersos y, en algunos casos, ocultos a propósito — lo cual, bien aprovechado, es parte del atractivo.</p><h2>Consejos prácticos para moverse por la zona</h2><ul><li>El Centro Histórico se disfruta mejor de día y en las primeras horas de la noche; para trayectos más tarde, conviene usar apps de transporte en lugar de caminar largas distancias solo.</li><li>Llevar lo indispensable al salir — el exceso de equipo fotográfico o joyería llamativa no es necesario para disfrutar la zona.</li><li>Las plazas principales (Zócalo, Bellas Artes, Santo Domingo) están bien iluminadas y transitadas incluso de noche; las calles menos concurridas conviene explorarlas de día.</li><li>Reservar el hospedaje con acceso claro o instrucciones de llegada es clave: varias propiedades boutique de la zona, incluida la nuestra, tienen entradas discretas por diseño.</li></ul><h2>Lo que gana quien se hospeda a pasos del Zócalo</h2><p>Más allá de la logística, hay algo intangible en despertar y salir directamente a una plaza con quinientos años de historia, o en volver caminando después de cenar sin depender de un auto. Un hospedaje boutique en el Centro Histórico — con habitaciones pensadas al detalle, en un edificio con carácter propio — ofrece algo que un hotel de cadena en otra zona no puede: la sensación de estar viviendo la ciudad, no solo visitándola.</p><h2>Nuestra recomendación</h2><p>Casa México ofrece diez suites privadas frente al Zócalo, con acceso discreto y diseño inspirado en los materiales del Centro Histórico. Si estás planeando tu visita, vale la pena considerar quedarte exactamente donde late el corazón de la ciudad.</p>"
+  },
+  {
+    "slug": "el-parian-del-zocalo-el-mercado-de-la-nao-de-china",
+    "title": "El Parián del Zócalo: el mercado de la Nao de China",
+    "category": "Cultura",
+    "date": "2026-10-05",
+    "tags": [
+      "Parián",
+      "Nao de China",
+      "Zócalo",
+      "Centro Histórico",
+      "Historia del Zócalo",
+      "Qué hacer cerca del Zócalo",
+      "Ciudad de México",
+      "Hotel boutique Zócalo"
+    ],
+    "excerpt": "Hace tres siglos, el Zócalo era el mercado más cosmopolita de la Nueva España. Descubre qué fue el Parián y cómo recorrer su huella a pie.",
+    "metaDescription": "El Parián fue el mercado de la Nao de China en el Zócalo CDMX. Conoce su historia y qué ver a pie: Catedral, Palacio Nacional y Templo Mayor.",
+    "published": true,
+    "coverImage": "images/blog/el-parian-del-zocalo-el-mercado-de-la-nao-de-china.jpg",
+    "bodyHtml": "<h2 dir=\"ltr\" style=\"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);\"><span style=\"font-size: 0.92rem; font-family: var(--sans); font-weight: 400;\">El Parián fue el mercado más cosmopolita de la Nueva España y estuvo en la Plaza Mayor, lo que hoy conocemos como el Zócalo de la Ciudad de México. Abrió en 1703 y vendía lo que llegaba de Asia en la Nao de China: sedas, porcelana, marfil, laca, especias y muebles que no se parecían a nada fabricado en este lado del mundo. Fue demolido en 1843, así que hoy no queda ni una piedra, pero la plaza donde estuvo sigue siendo el mejor lugar para entender de dónde viene esta ciudad.</span><br></h2><h3 dir=\"ltr\" style=\"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);\">Qué fue el Parián y por qué importa</h3><p dir=\"ltr\" style=\"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);\">Para entender el Parián hay que mirar hacia Manila. Entre 1565 y 1815, los galeones españoles cruzaban el Pacífico una o dos veces al año entre Filipinas y Acapulco, cargados con mercancías de China, Japón y el sudeste asiático. Se les llamó la Nao de China, y fue una de las primeras rutas comerciales verdaderamente globales de la historia. De regreso, llevaban plata novohispana, tan apreciada en Asia que el peso mexicano circuló como moneda de intercambio durante siglos.</p><p dir=\"ltr\" style=\"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);\">Las mercancías subían de Acapulco a la capital por el Camino de Asia, y en la Ciudad de México encontraban su escaparate. El nombre del mercado venía del Parián de Manila, el barrio donde se concentraba el comercio con los chinos. Aquí tomó su forma en 1703, en el costado suroeste de la plaza, cerca de los portales donde ya se vendía de todo.</p><p dir=\"ltr\" style=\"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);\">Imagínalo: puestos de telas que brillaban bajo el sol, porcelana azul y blanca en pilas, olor a canela y pimienta, comerciantes regateando en varios idiomas. Durante más de un siglo fue el rincón de mayor lujo y diversidad de la capital virreinal. Su huella llegó a la vida cotidiana: del Parián salieron los mantones de Manila, los biombos y buena parte de lo que después se volvió \"tradicional\" en los hogares mexicanos.</p><p dir=\"ltr\" style=\"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);\">El mercado no tuvo un final tranquilo. En 1828 fue saqueado durante un motín, y quedó tan deteriorado que en 1843 se ordenó su demolición. La plaza quedó despejada, y con el tiempo se convirtió en la explanada enorme que hoy conocemos.</p><h3 dir=\"ltr\" style=\"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);\">Cómo recorrer el Zócalo siguiendo la huella del Parián</h3><p dir=\"ltr\" style=\"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);\">Lo mejor es que no necesitas transporte. Todo lo que complementa esta historia está a pocos minutos a pie.</p><p dir=\"ltr\" style=\"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);\"><strong>Empieza en la plaza.</strong>&nbsp;Párate en el costado suroeste, bajo los Portales de Mercaderes, y mira hacia el centro. Ahí estuvo el Parián. Es un buen ejercicio de imaginación: quita la bandera monumental, quita los escenarios de eventos, y pon puestos de seda. La plaza mide unos 240 metros por lado, de las más grandes del mundo, y entenderás por qué el comercio aquí era tan intenso.</p><p dir=\"ltr\" style=\"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);\"><strong>Catedral Metropolitana.</strong>&nbsp;Ocupa todo el lado norte. Su construcción se extendió de 1573 a 1813, y por eso mezcla barroco, neoclásico y renacimiento. Entra con calma y fíjate en los altares laterales: el comercio de la Nao de China financió parte de esta riqueza, y se nota en el oro y en las maderas talladas.</p><p dir=\"ltr\" style=\"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);\"><strong>Palacio Nacional.</strong>&nbsp;Al este de la plaza. Su escalera principal guarda los murales de Diego Rivera sobre la historia de México, pintados entre 1929 y 1935. Uno de los paneles muestra el México prehispánico, con mercados y oficios que son casi un eco del Parián. El acceso suele ser gratuito, pero se pide identificación oficial y los horarios cambian, así que conviene confirmarlos antes de ir.</p><p dir=\"ltr\" style=\"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);\"><strong>Templo Mayor.</strong>&nbsp;A unos pasos de la esquina noreste. Fue el centro ceremonial de Tenochtitlan, y quedó sepultado bajo la ciudad colonial hasta que en 1978 trabajadores de la compañía de luz descubrieron el monolito de Coyolxauhqui. Hoy hay zona arqueológica y museo. Es el contraste perfecto: antes de los galeones y las sedas, esta plaza ya era el centro del mundo para otra civilización.</p><p dir=\"ltr\" style=\"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);\"><strong>Para quienes quieran seguir la ruta asiática.</strong>&nbsp;A unos diez minutos caminando hacia el poniente, sobre la calle de Dolores, está el pequeño Barrio Chino de la Ciudad de México, herencia más reciente pero emparentada con aquella historia de intercambio con Asia. Y cerca de ahí, la Casa de los Azulejos, un palacio del siglo XVI con azulejos de Puebla de inspiración oriental, es parada obligada.</p><h3 dir=\"ltr\" style=\"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);\">Consejos prácticos para tu visita</h3><ul dir=\"ltr\" style=\"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);\"><li><strong>Cuándo ir:</strong>&nbsp;temprano por la mañana, antes de las 10:00, cuando la plaza está tranquila y la luz es mejor para fotos. Por la tarde, cuando baja el sol, la Catedral se ilumina de dorado.</li><li><strong>Cuánto tiempo:</strong>&nbsp;medio día alcanza para la plaza, la Catedral y el Palacio Nacional. Con el Templo Mayor y su museo, conviene dedicar un día completo.</li><li><strong>Qué llevar:</strong>&nbsp;calzado cómodo, identificación oficial para el Palacio Nacional, y agua. La altitud de la ciudad, más de 2,200 metros, se nota si caminas mucho.</li><li><strong>Eventos:</strong>&nbsp;la plaza cambia por completo durante el Grito de Independencia, el Día de Muertos o las ferias temporales. Revisa el calendario antes de viajar, porque algunos eventos limitan el acceso.</li></ul><h3 dir=\"ltr\" style=\"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);\">Dónde hospedarte para vivirlo sin prisas</h3><p dir=\"ltr\" style=\"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);\">Si el plan es recorrer el Zócalo con calma, lo ideal es dormir dentro del mismo escenario. Casa México es un hotel boutique speakeasy frente al Zócalo, a unos pasos de la Catedral y del Templo Mayor. Desde sus suites puedes salir a la plaza al amanecer, antes que los grupos, y volver a descansar a media tarde. Reserva directa y atención por WhatsApp en lacasamexico.com.</p>"
   }
 ]
