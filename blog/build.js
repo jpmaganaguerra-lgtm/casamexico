@@ -129,9 +129,8 @@
       "      <div>\n" +
       '        <h4 class="footer-col-title">Síguenos</h4>\n' +
       '        <ul class="footer-links">\n' +
-      '          <li><a href="#">Instagram</a></li>\n' +
-      '          <li><a href="#">Facebook</a></li>\n' +
-      '          <li><a href="#">TikTok</a></li>\n' +
+      '          <li><a href="https://www.instagram.com/casamexicozocalo" target="_blank" rel="noopener">Instagram</a></li>\n' +
+            '          <li><a href="https://www.tiktok.com/@casamexicozocalo" target="_blank" rel="noopener">TikTok</a></li>\n' +
       "        </ul>\n" +
       '        <h4 class="footer-col-title" style="margin-top:1.5rem">Legal</h4>\n' +
       '        <ul class="footer-links">\n' +
@@ -141,7 +140,7 @@
       "      </div>\n" +
       "    </div>\n" +
       '    <div class="footer-bottom">\n' +
-      '      <p class="footer-copy">© 2025 Casa México · Hotel Boutique · Centro Histórico Ciudad de México</p>\n' +
+      '      <p class="footer-copy">© 2026 Casa México · Hotel Boutique · Centro Histórico Ciudad de México</p>\n' +
       '      <div class="footer-seo">\n' +
       '        <a href="#">Hotel con vista al Zócalo</a>\n' +
       '        <a href="#">Hotel boutique Centro Histórico</a>\n' +
@@ -216,8 +215,8 @@
         "url": absUrl(""),
         "logo": { "@type": "ImageObject", "url": absUrl("images/logo.webp") },
         "sameAs": [
-          "https://www.instagram.com/casamexicosuites",
-          "https://www.facebook.com/casamexicosuites"
+          "https://www.instagram.com/casamexicozocalo",
+          "https://www.tiktok.com/@casamexicozocalo"
         ]
       },
       "mainEntityOfPage": { "@type": "WebPage", "@id": absUrl(canonicalPath) }
@@ -262,7 +261,7 @@
     var published = (posts || []).filter(function (p) { return p.published !== false; });
     published.sort(function (a, b) { return a.date < b.date ? 1 : -1; });
 
-    var canonicalPath = "blog/index.html";
+    var canonicalPath = "blog/";
     var title = BLOG_NAME + " — Historias del Centro Histórico | " + SITE_NAME;
     var description = "Crónicas, guías y cultura del Centro Histórico de la Ciudad de México, contadas desde Casa México, frente al Zócalo.";
 
@@ -326,7 +325,7 @@
     }, published[0] ? published[0].date : "2026-09-30");
     var urls = [
       { loc: absUrl(""), lastmod: latestDate, changefreq: "monthly", priority: "1.0" },
-      { loc: absUrl("blog/index.html"), lastmod: latestDate, changefreq: "weekly", priority: "0.8" }
+      { loc: absUrl("blog/"), lastmod: latestDate, changefreq: "weekly", priority: "0.8" }
     ];
     published.forEach(function (post) {
       urls.push({
